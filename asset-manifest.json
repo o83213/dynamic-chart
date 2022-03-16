@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dynamic-chart/static/css/main.a505882c.css",
+    "main.js": "/dynamic-chart/static/js/main.58b72011.js",
+    "static/media/taipeilogo.png": "/dynamic-chart/static/media/taipeilogo.485cc5d8643acb6500df.png",
+    "index.html": "/dynamic-chart/index.html",
+    "main.a505882c.css.map": "/dynamic-chart/static/css/main.a505882c.css.map",
+    "main.58b72011.js.map": "/dynamic-chart/static/js/main.58b72011.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a505882c.css",
+    "static/js/main.58b72011.js"
+  ]
+}
