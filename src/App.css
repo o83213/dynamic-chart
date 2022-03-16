@@ -1,0 +1,26 @@
+.App {
+  position: absolute;
+  width: 960px;
+  height: 620px;
+  left: 100px;
+  top: 60px;
+  /* border: 0.1rem solid black; */
+  display: flex;
+}
+.logo {
+  width: 150px;
+}
+.logo img {
+  width: 100%;
+}
+.App .chart {
+  /* border: 0.1rem solid black; */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 1200px) {
+  .App {
+    display: block;
+    left: 0;
+  }
+}

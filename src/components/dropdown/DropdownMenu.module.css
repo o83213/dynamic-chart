@@ -1,7 +1,9 @@
 .dropdown {
   position: relative;
-  border: 0.1rem solid black;
+  /* border: 0.1rem solid black; */
   display: flex;
+  justify-content: end;
+  margin-bottom: -30px;
 }
 .dropdown span {
   margin: auto 0;
@@ -22,7 +24,7 @@
 }
 .dropdown-menu {
   position: absolute;
-  left: 50px;
+  right: 0px;
   width: 170px;
   top: calc(100% + 0.1rem);
   height: 200px;

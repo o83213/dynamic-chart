@@ -18,7 +18,6 @@ const DropdownMenu = (props) => {
     setValue(valueArray)
   }, [props.data])
   useEffect(() => {
-    console.log(props.data)
     console.log(head)
     const newContent = props.data[head]
     console.log(newContent)

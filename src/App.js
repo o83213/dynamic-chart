@@ -1,88 +1,45 @@
 import './App.css'
 import { useEffect, useState } from 'react'
-import { scaleBand } from 'd3'
-import Content from './components/Content/Content'
 import DropdownMenu from './components/dropdown/DropdownMenu'
+import useHttp from './hooks/useHttp'
+import BarChart from './components/Content/BarChart'
+import logo from './picture/taipeilogo.png'
+const getMax = (data) => {
+  let max = 0
+  if (data)
+    Object.entries(data).forEach((el) => {
+      if (el[0].includes('臺北市')) {
+        Object.entries(el[1]).forEach((item) => {
+          if (Number(item[1]) > max) {
+            max = item[1]
+          }
+        })
+      }
+    })
+  console.log(max)
+  return max
+}
 function App() {
   const [data, setData] = useState([])
   const [content, setContent] = useState({})
+  const { sendRequest } = useHttp(setData)
   useEffect(() => {
-    const fetchingData = async () => {
-      try {
-        console.log('fecthing data')
-        const apiURL = '/api/v1/rest/datastore/301000000A-000082-041'
-        const res = await fetch(apiURL)
-        console.log(res)
-        const data = await res.json()
-        console.log(data)
-        const record = data.result.records
-        console.log(record)
-        const filterData = {}
-        record.forEach((el) => {
-          if (filterData[el.site_id]) {
-            const {
-              site_id,
-              household_business_f,
-              household_business_m,
-              household_ordinary_f,
-              household_ordinary_m,
-              household_single_f,
-              household_single_m,
-            } = el
-            filterData[site_id].household_business_f += Number(
-              household_business_f,
-            )
-            filterData[site_id].household_business_m += Number(
-              household_business_m,
-            )
-            filterData[site_id].household_ordinary_f += Number(
-              household_ordinary_f,
-            )
-            filterData[site_id].household_ordinary_m += Number(
-              household_ordinary_m,
-            )
-            filterData[site_id].household_single_f += Number(household_single_f)
-            filterData[site_id].household_single_m += Number(household_single_m)
-          } else {
-            const {
-              site_id,
-              household_business_f,
-              household_business_m,
-              household_ordinary_f,
-              household_ordinary_m,
-              household_single_f,
-              household_single_m,
-            } = el
-            filterData[`${site_id}`] = {
-              site_id,
-              household_business_f: Number(household_business_f),
-              household_business_m: Number(household_business_m),
-              household_ordinary_f: Number(household_ordinary_f),
-              household_ordinary_m: Number(household_ordinary_m),
-              household_single_f: Number(household_single_f),
-              household_single_m: Number(household_single_m),
-            }
-            // console.log(filterData[`${site_id}`])
-          }
-        })
-        console.log(filterData)
-        setData(filterData)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchingData()
-  }, [])
-  useEffect(() => {
-    console.log('data state change!')
-  }, [data])
+    sendRequest()
+  }, [sendRequest])
   const changeContent = (data) => {
     setContent(data)
   }
+  console.log(getMax(data))
+  const contentMax = (getMax(data) / 10000).toFixed() * 10000
   return (
-    <div>
-      <DropdownMenu data={data} onSetContent={changeContent} />
-      {content && <Content content={content} />}
+    <div className="App">
+      <div className="logo">
+        <img src={logo} alt="" />
+      </div>
+      <div className="chart">
+        <DropdownMenu data={data} onSetContent={changeContent} />
+        {content && <BarChart content={content} max={contentMax} />}
+      </div>
     </div>
   )
 }
