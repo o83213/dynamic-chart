@@ -5,6 +5,7 @@ const useHttp = (applyData) => {
       console.log('sendRequest!')
       const apiURL = '/api/v1/rest/datastore/301000000A-000082-041'
       const res = await fetch(apiURL)
+
       const data = await res.json()
       const record = data.result.records
       const filterData = {}
