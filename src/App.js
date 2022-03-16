@@ -16,7 +16,6 @@ const getMax = (data) => {
         })
       }
     })
-  console.log(max)
   return max
 }
 function App() {
@@ -29,7 +28,6 @@ function App() {
   const changeContent = (data) => {
     setContent(data)
   }
-  console.log(getMax(data))
   const contentMax = (getMax(data) / 10000).toFixed() * 10000
   return (
     <div className="App">

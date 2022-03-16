@@ -9,18 +9,14 @@ const DropdownMenu = (props) => {
   useEffect(() => {
     let valueArray = []
     if (props.data) {
-      console.log(props.data)
       Object.entries(props.data).forEach((item) => {
         if (item[0].slice(0, 3) === '臺北市') valueArray.push(item[0])
       })
     }
-    // console.log(valueArray)
     setValue(valueArray)
   }, [props.data])
   useEffect(() => {
-    console.log(head)
     const newContent = props.data[head]
-    console.log(newContent)
     props.onSetContent(newContent)
   }, [value, head])
   const setHeadHandler = (value) => {

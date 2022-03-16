@@ -1,6 +1,8 @@
+import { useCallback } from 'react'
 const useHttp = (applyData) => {
-  const sendRequest = async () => {
+  const sendRequest = useCallback(async () => {
     try {
+      console.log('sendRequest!')
       const apiURL = '/api/v1/rest/datastore/301000000A-000082-041'
       const res = await fetch(apiURL)
       const data = await res.json()
@@ -52,12 +54,12 @@ const useHttp = (applyData) => {
           }
         }
       })
-      console.log(filterData)
+      console.log('Sending request success!')
       applyData(filterData)
     } catch (error) {
       console.error(error)
     }
-  }
+  }, [applyData])
   return { sendRequest }
 }
 
